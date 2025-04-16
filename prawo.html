@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mPrawo Jazdy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background-color: #f2f5fa;
+            padding: 10px;
+            color: #1e1e1e;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #007aff;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+            /* zwiększone z 20px */
+            color: #1c1c1e;
+            /* ciemniejszy, jak w mObywatelu */
+            margin-bottom: 4px;
+        }
+
+
+        .time {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: linear-gradient(to bottom right, #dde3f3, #e6d7e3);
+            border-radius: 16px;
+            padding: 20px 15px 25px;
+            padding-bottom: 0px;
+            color: #000;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .left-column {
+            float: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+            margin-right: 15px;
+        }
+
+        .photo {
+            width: 100px;
+            height: 130px;
+            background: #ccc url('nixon dojebaniec.png') center/cover no-repeat;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .flag {
+            width: 35px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+
+        .info {
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        .info p {
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .info .label {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .status-box {
+            width: 353px;
+            background: white;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            /* nachodzi na kartę */
+            padding: 10px 15px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            margin-top: 10px;
+        }
+
+        .status {
+            font-size: 14px;
+            color: green;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn {
+            background: #fff;
+            border-radius: 14px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            color: #777;
+            margin: 20px 10px 5px;
+            font-weight: bold;
+        }
+
+        .data-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 14px;
+            font-size: 14px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+        }
+
+        .data-box p {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .category {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 14px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            font-weight: 500;
+        }
+
+        .delete {
+            background: #fff0f0;
+            color: #d80000;
+            font-weight: bold;
+            padding: 14px;
+            border-radius: 16px;
+            text-align: left;
+            margin: 20px 0 30px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .status-box {
+            background: white;
+            border-top: 1px solid #ddd;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0 -15px -15px -15px;
+            /* „rozciąga” go na szerokość karty */
+        }
+
+        .status {
+            font-size: 14px;
+            color: green;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delete img {
+            width: 25px;
+            height: 25px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <a href="index.html">
+            <div>&larr; Wróć</div>
+        </a>
+        <div class="title">mPrawo jazdy</div>
+        <div style="width: 40px"></div>
+    </div>
+
+    <div class="time" id="current-time">Czas: --:--:-- --.--.----</div>
+
+    <div class="card">
+        <div class="left-column">
+            <div class="photo"></div>
+            <img class="flag" src="https://flagcdn.com/pl.svg" alt="Flaga Polski">
+        </div>
+        <div class="info">
+            <p><strong>PATRYK</strong><br><span class="label">Imię (imiona)</span></p>
+            <p><strong>SZABELEWSKI</strong><br><span class="label">Nazwisko</span></p>
+            <p><strong>04.01.2007</strong><br><span class="label">Data urodzenia</span></p>
+            <p><strong>WARSZAWA</strong><br><span class="label">Miejsce urodzenia</span></p>
+            <p><strong>07210402957</strong><br><span class="label">PESEL</span></p>
+            <p><strong>A, B1</strong><br><span class="label">Kategorie</span></p>
+        </div>
+
+        <div class="status-box">
+            <div class="status"><img src="check.png" alt=""> Dokument ważny</div>
+        </div>
+    </div>
+
+
+    <div class="btn">
+        <img src="user.png" alt="" class="user"><span><b>Potwierdź swoje dane</b></span>
+        <img src="right-arrow.png" alt="" class="right-arrow">
+    </div>
+    <div class="btn">
+        <img src="court.png" alt="" class="court"><span><b>Punkty karne</b></span>
+        <img src="right-arrow.png" alt="" class="right-arrow">
+    </div>
+
+    <div class="section-title">Ostatnia aktualizacja</div>
+    <div class="btn"><span><b>21.02.2024</b></span><span style="color: #007aff; font-weight: bold;">Aktualizuj</span>
+    </div>
+
+    <div class="section-title">Dane dokumentu</div>
+    <div class="data-box">
+        <p><b>Data ważności:</b><br>Bezterminowo</p>
+        <p><b>Data wydania:</b><br>21.02.2024</p>
+        <p><b>Status:</b><br>Wydany</p>
+        <p><b>Numer dokumentu:</b><br>036758984643</p>
+        <p><b>Numer blankietu:</b><br>J54332422</p>
+        <p><b>Organ wydający:</b><br>Szczecin</p>
+        <p><b>Uprawnienia:</b><br>01.01, 02.01</p>
+    </div>
+
+    <div class="section-title">Twoje kategorie</div>
+    <div class="btn"><b>Kategoria A
+            <img src="down-chevron.png" alt="" class="right-arrow"></b>
+    </div>
+
+    <div class="btn"><b>Kategoria B
+            <img src="down-chevron.png" alt="" class="right-arrow"></b>
+    </div>
+
+    <div class="delete"><img src="delete.png" alt="" class="trash">Usuń dokument</div>
+
+    <script>
+        function updateCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            document.getElementById('current-time').textContent = `Czas: ${hours}:${minutes}:${seconds} ${day}.${month}.${year}`;
+        }
+
+        updateCurrentTime();
+        setInterval(updateCurrentTime, 1000);
+    </script>
+</body>
+
+</html>
